@@ -17,19 +17,19 @@ class Employee(models.Model):
 
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50)
-    last_name= models.CharField(max_length=50)
-    contact= models.CharField(max_length=12, blank= False, null= False, default= '0')
-    alter_contact_no= models.CharField(max_length= 12, blank= False, null=False, default= '0')
-    birth_date= models.DateField()
-    address= models.TextField(max_length=200)
-    join_date=models.DateField()
-    email= models.EmailField(max_length=254)
-    gender= models.CharField(max_length=1, choices=GENDER_CHOICES)
-    status= models.BooleanField()
-    profile_photo= models.ImageField(upload_to=None,height_field=None,width_field=None,max_length=100)
+    last_name = models.CharField(max_length=50)
+    contact = models.CharField(max_length=12, blank= False, null= False, default= '0')
+    alter_contact_no = models.CharField(max_length= 12, blank= False, null=False, default= '0')
+    birth_date = models.DateField()
+    address = models.TextField(max_length=200)
+    join_date = models.DateField()
+    email = models.EmailField(max_length=254)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    status = models.BooleanField()
+    profile_photo = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
     #leave_left=models.IntegerField()
     #designation        =models.CharField(max_length=50)
-    confirmation_period= models.IntegerField(default=0,blank=False)
+    confirmation_period = models.IntegerField(default=0, blank=False)
 
 
 
@@ -45,9 +45,9 @@ class Employee(models.Model):
 class DesignationHistory(models.Model):
 
 
-    employee= models.ForeignKey(Employee, on_delete=models.CASCADE)
-    designation= models.ForeignKey(Designation, on_delete=models.CASCADE)
-    date= models.DateField(auto_now=True, auto_now_add=False)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    designation = models.ForeignKey(Designation, on_delete=models.CASCADE)
+    date = models.DateField(auto_now=True, auto_now_add=False)
 
 
 
@@ -58,9 +58,9 @@ class DesignationHistory(models.Model):
 class DepartmentHistory(models.Model):
 
 
-    employee= models.ForeignKey(Employee, on_delete=models.CASCADE)
-    department= models.ForeignKey(Department,on_delete=models.CASCADE)
-    date= models.DateField(auto_now=False, auto_now_add=True)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department,on_delete=models.CASCADE)
+    date = models.DateField(auto_now=False, auto_now_add=True)
 
 
 
@@ -75,9 +75,9 @@ class DepartmentHistory(models.Model):
 class JobTypeHistory(models.Model):
 
 
-    employee= models.ForeignKey(Employee, on_delete=models.CASCADE)
-    jobtype= models.ForeignKey(JobType, on_delete= models.CASCADE)
-    date= models.DateField(auto_now=False,auto_now_add=False)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    jobtype = models.ForeignKey(JobType, on_delete= models.CASCADE)
+    date = models.DateField(auto_now=False,auto_now_add=False)
 
     def __str__(self):
         return '{}{}{}'.format(self.Employee, self.jobtype,self.date)
@@ -87,11 +87,11 @@ class JobTypeHistory(models.Model):
 class LeaveHistory(models.Model):
 
 
-    employee= models.ForeignKey(Employee, on_delete=models.CASCADE)
-    attendance= models.ForeignKey('self', on_delete=models.CASCADE)
-    date= models.DateField(auto_now=True,auto_now_add=False)
-    peivilege_leave= models.CharField(max_length=50,blank=True,null=False)
-    casual_leave= models.CharField(max_length=50,blank=True,null=False)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    attendance = models.ForeignKey('self', on_delete=models.CASCADE)
+    date = models.DateField(auto_now=True,auto_now_add=False)
+    peivilege_leave = models.CharField(max_length=50,blank=True,null=False)
+    casual_leave = models.CharField(max_length=50,blank=True,null=False)
 
 
 
