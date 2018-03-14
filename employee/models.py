@@ -2,36 +2,35 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from decimal import Decimal
-import employee,Company,Attendance
-#from employee.models import Designation
+import Company,Attendance
 from Company.models import JobType,Designation,Department
-#from Company.models import JobType
-
-# Create your models here.
 
 
-class employee(models.Model):
+
+
+
+class Employee(models.Model):
     GENDER_CHOICES=(
         ('M','Male'),
         ('F','Female'),
     )
 
-    first_name         =models.CharField(max_length=50)
-    middle_name        =models.CharField(max_length=50)
-    last_name          =models.CharField(max_length=50)
-    contact            =models.CharField(max_length=12,blank=False,null=False,default='0')
-    alter_contact_no   =models.CharField(max_length=12,blank=False,null=False,default='0')
-    birth_date         =models.DateField()
-    address            =models.TextField(max_length=200)
-    join_date          =models.DateField()
-    email              =models.EmailField(max_length=254)
-    gender             =models.CharField(max_length=1, choices=GENDER_CHOICES)
-    status             =models.BooleanField()
-    profile_photo      =models.ImageField(upload_to=None,height_field=None,width_field=None,max_length=100)
+    first_name = models.CharField(max_length=50)
+    middle_name = models.CharField(max_length=50)
+    last_name= models.CharField(max_length=50)
+    contact= models.CharField(max_length=12, blank= False, null= False, default= '0')
+    alter_contact_no= models.CharField(max_length= 12, blank= False, null=False, default= '0')
+    birth_date= models.DateField()
+    address= models.TextField(max_length=200)
+    join_date=models.DateField()
+    email= models.EmailField(max_length=254)
+    gender= models.CharField(max_length=1, choices=GENDER_CHOICES)
+    status= models.BooleanField()
+    profile_photo= models.ImageField(upload_to=None,height_field=None,width_field=None,max_length=100)
     #leave_left=models.IntegerField()
     #designation        =models.CharField(max_length=50)
-    confirmation_period=models.IntegerField(default=0,blank=False)
-    
+    confirmation_period= models.IntegerField(default=0,blank=False)
+
 
 
 
@@ -44,63 +43,69 @@ class employee(models.Model):
 
 
 class DesignationHistory(models.Model):
-    employee         =models.ForeignKey(employee, on_delete=models.CASCADE)
-    designation      =models.ForeignKey(Designation, on_delete=models.CASCADE)
-    date             =models.DateField(auto_now=True, auto_now_add=False)
+
+
+    employee= models.ForeignKey(Employee, on_delete=models.CASCADE)
+    designation= models.ForeignKey(Designation, on_delete=models.CASCADE)
+    date= models.DateField(auto_now=True, auto_now_add=False)
 
 
 
     def __str__(self):
-        return '{}{}{}'.format(self.employee,self.date,self.designation)
+        return '{}{}{}'.format(self.Employee,self.date,self.designation)
 
 
 class DepartmentHistory(models.Model):
-    employee         =models.ForeignKey(employee, on_delete=models.CASCADE)
-    department       =models.ForeignKey(Department,on_delete=models.CASCADE)
-    date             =models.DateField(auto_now=False, auto_now_add=True)
+
+
+    employee= models.ForeignKey(Employee, on_delete=models.CASCADE)
+    department= models.ForeignKey(Department,on_delete=models.CASCADE)
+    date= models.DateField(auto_now=False, auto_now_add=True)
 
 
 
 
 
     def __str__(self):
-        return '{}{}{}'.format(self.employee,self.date,self.department)
+        return '{}{}{}'.format(self.Employee,self.date,self.department)
 
 
 
 
 class JobTypeHistory(models.Model):
-    employee       =models.ForeignKey(employee, on_delete=models.CASCADE)
-    jobtype        =models.ForeignKey(JobType, on_delete= models.CASCADE)
-    date           =models.DateField(auto_now=False,auto_now_add=False)
 
 
-
+    employee= models.ForeignKey(Employee, on_delete=models.CASCADE)
+    jobtype= models.ForeignKey(JobType, on_delete= models.CASCADE)
+    date= models.DateField(auto_now=False,auto_now_add=False)
 
     def __str__(self):
-        return '{}{}{}'.format(self.employee, self.jobtype,self.date)
+        return '{}{}{}'.format(self.Employee, self.jobtype,self.date)
 
 
 
 class LeaveHistory(models.Model):
-    employee        =models.ForeignKey(employee, on_delete=models.CASCADE)
-    attendance      =models.ForeignKey('self', on_delete=models.CASCADE)
-    date            =models.DateField(auto_now=True,auto_now_add=False)
-    peivilege_leave =models.CharField(max_length=50,blank=True,null=False)
-    casual_leave    =models.CharField(max_length=50,blank=True,null=False)
+
+
+    employee= models.ForeignKey(Employee, on_delete=models.CASCADE)
+    attendance= models.ForeignKey('self', on_delete=models.CASCADE)
+    date= models.DateField(auto_now=True,auto_now_add=False)
+    peivilege_leave= models.CharField(max_length=50,blank=True,null=False)
+    casual_leave= models.CharField(max_length=50,blank=True,null=False)
 
 
 
     def __str__(self):
-        return '{}{}{}'.format(self.employee,self.attendence,self.date)
+
+        return '{}{}{}'.format(self.Employee,self.attendence,self.date)
 
 
 
 
-    
-    
-    
-        
+
+
+
+
 
 
 # class Salary(models.Model):
@@ -120,16 +125,16 @@ class LeaveHistory(models.Model):
 #     public_holidays       =models.IntegerField(default = 0)
 #     paid_days             =models.IntegerField( default = 0)
 #     net_salary            =models.IntegerField(default=0)
-    
-    
-    
-    
+
+
+
+
 
 
 
 #     def __str__(self):
 #         return '{}  {}'.format(self.user, self.date)
-    
+
 # class Attendance(models.Model):
 #     first_name   =models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
 #     MARK=(
@@ -142,10 +147,10 @@ class LeaveHistory(models.Model):
 #         ('n','enter'),
 #         ('s','SeekLeave'),
 #         ('c','CausualLeave'),
-        
+
 #     )
-    
-        
+
+
 #     first_name               =models.ForeignKey(employee, default = False, blank = True)
 #     date                     =models.DateField()
 #     mark                     =models.CharField(max_length=7,choices=MARK,default=False)
@@ -160,7 +165,7 @@ class LeaveHistory(models.Model):
 
 #     def __str__(self):
 #         return '{}{}'.format(self.first_name,self.date)
-    
+
 # class Company(models.Model):
 #     name          =models.CharField(max_length=50,blank=False,null=False)
 #     location      =models.TextField(max_length=200,blank=False,null=False)
@@ -203,4 +208,3 @@ class LeaveHistory(models.Model):
 
 #     def __str__(self):
 #         return designation
-    

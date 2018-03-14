@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'employee',
     'Company',
     'Attendance',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'payroll.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'payroll',
+            'NAME': 'payroll2',
             'USER': 'postgres',
             'PASSWORD': 'postgres',
             'HOST': 'localhost',

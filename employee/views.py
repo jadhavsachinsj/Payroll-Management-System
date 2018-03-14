@@ -1,7 +1,7 @@
 from django.shortcuts import render #,get_object_or_404
 from django.http import HttpResponse
 # Create your views here.
-from .models import employee
+from .models import Employee
 #from .forms import PostForm
 
 def employee_create(request):
@@ -19,10 +19,10 @@ def employee_list(request):
 
     }
 
-    
+
     # if request.user.is_authenticated():
-        
-    
+
+
     #     context={
     #         "first_name":"Sachin",
     #     }
@@ -39,4 +39,3 @@ def employee_home(request):
 
 def employee_delete(request):
     return HttpResponse("<h1> well-come Sachin...!</h1>")
-
