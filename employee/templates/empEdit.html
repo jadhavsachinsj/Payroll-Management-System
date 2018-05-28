@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block content %}
+<main role="main">
+
+    <div class="col col-md-9 pt-3 px-4">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">New Employee</h1>
+        </div>
+
+
+        <div class="form_add_employee">
+
+            <form method="POST" class="employee-form" enctype="multipart/form-data">{% csrf_token%}
+
+                <div class="card card-body">
+
+
+                    {{ user_form.as_p }}
+                    {{ des_history_form.as_p }}
+                    {{ jobtype_history_form.as_p }}
+                    {{ department_history_form.as_p }}
+                    {{ employee_form.as_p }}
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+                </div>
+            </form>
+            {% endblock %}
+        </div>
+    </div>
+</main>
+
+
+        <!-- Icons -->
+        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+        <script>
+         feather.replace()
+        </script>

@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'designation_add' %}">Add Designation</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="{% url 'add_jobtype' %}">Add JobType</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href= "{% url 'add_worktype' %}">Add WorkType</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'add_holiday' %}">Add Holiday</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'add_department' %}">Add Department</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'deduction' %}">Add Deductions</a>
+    </li>
+</ul>
+
+
+<div class="jumbotron">
+    <div class="card">
+        <div class="card-header">
+            <h3>{{company.name }}</h3>
+        </div><!--End of Header Class -->
+
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address Line1</th>
+
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Country</th>
+                        <th>Fax</th>
+                        <th>Website</th>
+                        <th> Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{company.name}}</td>
+                        <td>{{company.address_line1}}</td>
+
+                        <td>{{company.city}}</td>
+                        <td>{{company.State}}</td>
+                        <td>{{company.country}}</td>
+                        <td>{{company.fax}}</td>
+                        <td>{{company.website}}</td>
+                        <td>
+                            <span><a class="btn btn-primary btn-sm " href="#">Edit</a></span>
+                            <span> <button type="button" class="btn btn-danger btn-sm ">Delete</button></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div> <!-- end of Card class -->
+</div>
+
+{% endblock %}

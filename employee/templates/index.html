@@ -1,27 +1,224 @@
-<!--DOCTYPE html-->
-<html>
-  <body>
-    {{ first_name }}
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="payroll_logo.png">
+
+        <title>Dashboard</title>
+        <!-- Bootstrap Complete CSS V4.0 -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
-    {% for obj in  object_list %}
-    
-    {{ obj.id }}<br>
-    {{ obj.first_name }}<br>
-    {{ obj.middle_name }}<br>
-    {{ obj.last_name }}<br>
-    {{ obj.contacts }}<br>
-    {{ obj.alter_contact_no }}<br>
-    {{ obj.birth_date }}<br>
-    {{ obj.email }}<br>
-    {{ obj.gender }}<br>
-    
-    
-    {% endfor %}
-    
-  </body>
-</htmll>
+        <!--Link for Font awesome icons -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        <!-- Custom styles for this template -->
+        <!-- <link href="styles.css" rel="stylesheet">-->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/company.css' %}">
+        <link rel="stylesheet" href="{% static 'css/attencence.css' %}">
+        <link rel="stylesheet" href="{% static 'css/salary.css' %}">
+
+    </head>
+
+    <body>
+
+        {% if user.is_authenticated and user.is_superuser %}
+
+
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <a class="navbar-brand col-sm-3 " href="#">{{ user.employee.company }}</a>
+
+            <ul class="navbar-nav px-3" style="float:right;">
+                <li class="nav-item text-nowrap " style="color:white;">
+                    Wellcome...{{ user.username }}
+                </li>
+                <li class="nav-item text-nowrap">
+
+                    <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 border-right a1">
+                    <div class="card indexcard fixed-top stickymargin">
+                        <div class="card-header">
+                            <a href="{% url 'company_display' pk=user.employee.company.pk %}" >
+                                <i class="fa fa-home"></i>
+                                Company</a>
+                        </div><!-- Card Header Closed -->
+                        <ul class="list-group">
+                            <a href="{% url 'employee_display' pk=user.pk %} " class="list-group-item"><i class="fa fa-user-o"></i> Profile
+                            </a>
+
+
+                            <a href="{% url 'employee_list' %}" class="list-group-item"><i class="fa fa-user-o"></i> Employee
+                            </a>
+
+
+                            <a href="{% url 'add_attendance' %}" class="list-group-item"><i class="fa fa-file-text"></i> Attendance</a>
+                            <a href="{% url 'select_salary' %}" class="list-group-item"><i class="fa fa-money"></i>  Salary</a>
+                        </ul>
+                    </div><!-- end of card-->
+
+                </div><!-- end of col -->
+
+                {% elif user.is_authenticated and not user.is_superuser %}
+
+
+                <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+                    <a class="navbar-brand col-sm-3 " href="#">{{ user.employee.company }}</a>
+
+                    <ul class="navbar-nav px-3" style="float:right;">
+                        <li class="nav-item text-nowrap " style="color:white;">
+                            Wellcome...{{ user.username }}
+                        </li>
+                        <li class="nav-item text-nowrap">
+
+                            <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2 border-right a1">
+                            <div class=" fixed-top stickymargin">
+
+                                <div class="card indexcard " >
+                                    <div class="card-header">
+                                        <a href="#" >
+                                            <i class="fa fa-home"></i>
+                                            Company</a>
+                                    </div>
+                                    <ul class="list-group">
+
+                                        <a href="{% url 'employee_display' pk=user.pk %}" class="list-group-item"><i class="fa fa-user-o"></i> Profile</a>
+
+
+
+                                        <a href="#" class="list-group-item"><i class="fa fa-file-text"></i> Attendence</a>
+                                        <a href="#" class="list-group-item"><i class="fa fa-money"></i>  Salary</a>
+                                        <a href="#" class="list-group-item"><i class="fa fa-money"></i>  Apply Leave</a>
+                                        <a href="#" class="list-group-item"><i class="fa fa-money"></i> leave</a>
+                                    </ul>
+                                </div><!-- end of card-->
+                                <!--   </div><!-- end of indexcard-->
+                            </div><!-- end of jumbotron-->
+
+                        </div><!--end of col-2 -->
+
+
+
+                        {% else %}
+
+
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                                <a class="navbar-brand" href="#">payroll Management System </a>
+
+                                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">About us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Services</a>
+                                    </li>
+
+                                </ul>
+                                <!-- <form class="form-inline my-2 my-lg-0">
+                                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                     </form> -->
+
+                            </div>
+                        </nav>
+
+
+
+                        {% endif %}
+
+                        <div class="col-md-10 signupcenter">
+
+                            {% include 'messages.html'%}
+                            {% block content %}
+
+                            {% endblock %}
+
+                        </div>
+                    </div>
 
 
 
 
+                <!-- Bootstrap core JavaScript
+                     ================================================== -->
+                <!-- Placed at the end of the document so the pages load faster -->
+                <!-- my comment
+                     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+                     <script src="../../../../assets/js/vendor/popper.min.js"></script>
+                     <script src="../../../../dist/js/bootstrap.min.js"></script>
+                -->
+
+                <!-- Bootstrap -->
+
+
+                <!-- Latest compiled and minified JavaScript -->
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+                <!-- Icons -->
+                <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+                <script>
+                 feather.replace()
+                </script>
+
+                <!-- Graphs -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+                <script>
+                 var ctx = document.getElementById("myChart");
+                 var myChart = new Chart(ctx, {
+                     type: 'line',
+                     data: {
+                         labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                         datasets: [{
+                             data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+                             lineTension: 0,
+                             backgroundColor: 'transparent',
+                             borderColor: '#007bff',
+                             borderWidth: 4,
+                             pointBackgroundColor: '#007bff'
+                         }]
+                     },
+                     options: {
+                         scales: {
+                             yAxes: [{
+                                 ticks: {
+                                     beginAtZero: false
+                                 }
+                             }]
+                         },
+                         legend: {
+                             display: false,
+                         }
+                     }
+                 });
+                </script>
+    </body>
+</html>

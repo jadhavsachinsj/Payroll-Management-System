@@ -1,0 +1,78 @@
+/* css for Company add */
+.label{
+  margin-top:1rem;
+}
+.buttonadd{
+ /* width: 10rem;
+  background-color: aliceblue;
+  padding-top: 5px;
+  padding-bottom: 9px;
+  margin-top: 2rem;*/
+  margin-left: auto;
+  margin-right: auto;
+  width: 0;
+
+}
+.center{
+  margin-right:auto;
+  margin-left:auto
+}
+
+.jumbotroncenter{
+  margin-top: 1rem;
+  margin-bottom: 0px;
+  padding-bottom: 1rem;
+  padding-top: 0rem;
+}
+.outline{
+  outline:2px;
+
+}/*
+.border{
+  border-right:4px;
+}*/
+
+.signupwidth{
+  width: 8rem;
+}
+
+/* css for the Desinnation add designation.html   */
+
+.center {
+  margin-top: 5rem;
+  margin-right: auto;
+  margin-left: auto;
+  width: 50%;
+}
+
+/* css for jobtype add*/
+
+.jobtypeCenter {
+
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 5rem;
+
+}
+
+/* css for deduction_add.html */
+
+.center {
+  margin-left:auto;
+  margin-right:auto;
+  width:70%;
+
+}
+
+.cardbodycenter{
+  padding-left:9rem;
+  padding-right:9rem;
+  padding-top:2rem;
+
+}
+
+.textalign {
+  text-align:center;
+
+}

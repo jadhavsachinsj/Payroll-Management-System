@@ -1,0 +1,63 @@
+{% extends 'index.html'%}
+{% load staticfiles %}
+{% block content %}
+<div class="container-fluid alert alert-secondary cont-emp">
+    <div class="row">
+        <div class="col-md-8 " role="alert">
+            <!-- <div class="alert alert-secondary" role="alert">-->
+            <h2>Employee Info</h2>
+        </div>
+        <div class="col-md-4 ">
+            <a href="{% url 'employee_create' %}">
+                <button type="button" class="btn btn-success btn-add-emp">
+                    Add
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="table  table-responsive table-bordered table-hover">
+    <table class="table table-md table-striped ">
+
+        <thead>
+            <tr>
+
+                <th>User Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Contact</th>
+                <th>Is Admin</th>
+                <th>Birthdate</th>
+                <th>Address</th>
+                <th>Join date</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Status</th>
+                <th>Staff</th>
+                <th>Last Login</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        {% for obj in object_list %}
+        <tbody>
+            <tr>
+                <td>{{obj.user.username}}</td>
+                <td>{{obj.user.first_name}}</td>
+                <td>{{obj.user.last_name}}</td>
+                <td>{{obj.user.employee.contact}}</td>
+                <td>{{obj.user.is_superuser}}</td>
+                <td>{{obj.user.employee.birth_date}}</td>
+                <td>{{obj.user.employee.address}}</td>
+                <td>{{obj.user.date_joined}}</td>
+                <td>{{obj.user.email}}</td>
+                <td>{{obj.user.employee.gender}}</td>
+                <td>{{obj.user.is_active}}</td>
+                <td>{{obj.user.is_staff}}</td>
+                <td>{{obj.user.last_login}}</td>
+                <td> <a class="btn btn-primary" href="{% url 'employee_update' pk=obj.user.pk %}" role="button">Edit</a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+
+        {% endblock%}

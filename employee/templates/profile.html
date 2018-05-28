@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+    <div class="row">
+       <div class="cardwidth">
+        <div class="card bg-info card border-light cardwidth">
+            <div class="card-header bg-info"><center><h3>Wellcome ! {{user.first_name}}</h3></center>
+            </div>
+            <div class="card-body card border-light mb-3">
+                <div class="row">
+                    <div class="col-md-4" align="center"> <img alt="User Pic" src="{{ user.employee.profile_photo.url }}" class="img-thumbnail"> </div>
+                    <div class=" col-md-8 ">
+
+                        <table class="table table-user-information">
+                            <tbody>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Designation:</td>
+                                    <td> {{designation.designation }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Contact:</td>
+                                    <td>{{ user.employee.contact }}<br>{{ user.employee.alter_contact_no }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Birth Date:</td>
+                                    <td>{{ user.employee.birth_date }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address:</td>
+                                    <td>{{ user.employee.address }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Join Date:</td>
+                                    <td>{{ user.date_joined }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+
+                                <tr>
+                                    <tr>
+                                        <td>Gender:</td>
+                                        <td>{{user.employee.gender}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>{{user.is_active}}</td>
+                                    </tr>
+
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+
+                       <center> <a href="#" class="btn btn-primary">Edit</a></center>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+       </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'index.html' %}
+{% block content %}
+<form method="post" >{% csrf_token %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="card" width:18rem;>
+                <div class="card-header">
+                    Add Company
+                </div>
+                <div class="card-body ">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.name.label_tag }}
+                            </div>
+                            {{ form.name }}
+                        </div>
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.address_line1.label_tag}}
+                                {{ form.address_line1 }}
+                            </div>
+                        </div>
+                    </div><!-- form row end for name and address1-->
+                    <div class="form-row">
+
+                            <div class="col-md-6">
+                                <div class="label">
+
+                                    {{ form.address_line2.label_tag }}
+                                    {{ form.address_line2 }}
+                                </div>
+                            </div>
+
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.city.label_tag }}
+                                {{ form.city }}
+                            </div>
+                        </div>
+                    </div>                                           <!-- form row class end for address2-->
+                    <div class="form-row">
+
+                        <div class="col-md-4">
+                            <div class="label">
+                                {{ form.State.label_tag }}
+                                {{ form.State }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="label">
+                                {{ form.country.label_tag }}
+                                {{ form.country }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="label">
+                                {{ form.postal_code.label_tag }}
+                                {{ form.postal_code}}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="label">
+                            <div class="col-md-6">
+
+                                {{ form.fax.label_tag }}
+                                {{ form.fax }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.website.label_tag }}
+                                {{ form.website }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="jumbotron jumbotroncenter">
+                            <div class="row">
+
+                                <input type=submit value="Add" class="buttonadd center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container center">
+
+    <div class="card card-body cardbodycenter">
+
+        <form method="Post">{% csrf_token %}
+            {{deduction_form.as_p}}
+       <p class="textalign">     <button type="submit" class="btn btn-primary" style="width:40%">Add</button></p>
+        </form>
+      </div>
+  </div>
+
+
+
+
+
+{% endblock %}

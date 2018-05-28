@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <div class="card center">
+        <div class="card-header">
+            <h2> Designation </h2>
+        </div><!--   card-header end  -->
+        <div class="card-body">
+
+            {{ form.as_p }}
+            <div class="container">
+                <button type="submit" class="btn btn-primary">Primary</button>
+
+            </div>
+        </div>
+    </div>
+  <!--  {{form.as_p}}-->
+<!--    sjfsdjfjsd-->
+ <!--   <button type="submit" class="btn btn-primary">Primary</button>-->
+</form>
+
+
+<div class="table  table-responsive table-bordered table-hover">
+    <table class="table table-md table-striped ">
+
+        <thead>
+            <tr>
+
+                <th>designation </th>
+                <th>Previledge Leave</th>
+                <th>Casual Leave </th>
+            </tr>
+        </thead>
+        {% for des in designation %}
+
+        <tbody>
+            <tr>
+                <td>{{des.designation}}</td>
+                <td>{{des.privilege_leave}}</td>
+                <td>{{des.casual_leave}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+
+
+
+
+
+
+
+{% endblock %}

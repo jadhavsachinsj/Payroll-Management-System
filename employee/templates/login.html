@@ -1,0 +1,53 @@
+{% extends 'index.html'%}
+{% load staticfiles %}
+<!--
+     <!doctype html>
+     <html lang="en">
+     <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <meta name="description" content="">
+     <meta name="author" content="">
+     <link rel="icon" href="payroll_logo.png">
+
+     <title>Sign In to Payroll</title>
+
+     <!-- Bootstrap Complete CSS V4.0 -->
+<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- Custom styles for this template -->
+<!--<link href="{% static 'css/style.css' %}" rel="stylesheet">-->
+
+<!-- </head> -->
+{% block content %}
+
+    <body class="text-center">
+
+        <div class="form-signin">
+            <!--
+            <form class="form-signin"> -->
+            <form method="POST" class="signin"> {% csrf_token %}
+
+                <img class="mb-4" src="{% static 'images/payroll_logo.png' %}" alt="Payroll Logo" width="100" height="100">
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+                {% include 'messages.html' %}
+
+                <!-- <input type="text" id="username" class="form-control" name="username" placeholder="Username" style="margin-bottom: 7px;" required autofocus> -->
+                {{form.username}}
+                <label for="inputPassword" class="sr-only">Password</label>
+                <!-- <input type="password" id="password" class="form-control" name="password" placeholder="Password" style="margin-bottom: 5px;" required> -->
+                {{form.password}}
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+            </form>
+        </div>
+    </body>
+
+</html>
+{% endblock %}

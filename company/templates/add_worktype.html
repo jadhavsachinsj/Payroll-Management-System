@@ -1,0 +1,44 @@
+{% extends 'index.html'%}
+{% load staticfiles %}
+
+{% block content %}
+
+  <div class="container">
+      <div class="card card-header">
+          <h3> {{ request.user.employee.company }} WorkType</h3>
+      </div>
+
+      <div class="card card-body">
+
+          <form method="Post">{% csrf_token %}
+              {{form.as_p}}
+              <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+      </div>
+  </div>
+
+
+
+
+<div class="table  table-responsive table-bordered table-hover">
+    <table class="table table-md table-striped ">
+
+        <thead>
+            <tr>
+
+                <th>WorkType </th>
+
+            </tr>
+        </thead>
+        {% for works in worktype_list %}
+
+        <tbody>
+            <tr>
+                <td>{{works.type}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+
+
+
+{% endblock %}

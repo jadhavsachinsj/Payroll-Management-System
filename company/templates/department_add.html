@@ -1,0 +1,57 @@
+{% extends 'index.html'%}
+{% load staticfiles %}
+
+{% block content %}
+
+<form method="post">{% csrf_token %}
+    <div class="card center">
+        <div class="card-header">
+            <h2> Department</h2>
+        </div><!--   card-header end  -->
+        <div class="card-body">
+
+            {{ form.as_p }}
+            <div class="container">
+                <button type="submit" class="btn btn-primary">Add</button>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<div class="jumbotron">
+    <div class="card">
+        <div class="card-header">
+            <h3>{{request.user.employee.company.name }}</h3>
+        </div><!--End of Header Class -->
+
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th> Action</th>
+                    </tr>
+                </thead>
+                {% for dep in department_list %}
+                <tbody>
+                    <tr>
+                        <td>{{ dep.department}}</td>
+                        <td>
+                            <span><a class="btn btn-primary btn-sm " href="#">Edit</a></span>
+                            <span> <button type="button" class="btn btn-danger btn-sm ">Delete</button></span>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div> <!-- end of Card class -->
+</div>
+
+
+
+{% endblock %}

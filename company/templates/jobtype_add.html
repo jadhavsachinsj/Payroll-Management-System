@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block content%}
+
+<div class="container jobtypeCenter">
+    <form method="Post">{% csrf_token %}
+        <div class="card card-body">
+            {{form.as_p}}
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock%}

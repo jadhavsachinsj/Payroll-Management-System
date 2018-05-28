@@ -1,0 +1,250 @@
+{% extends 'index.html' %}
+{% block content %}
+
+
+<main role="main" class="col-md-9 "> <!--px-4-->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mt-5 mb-3 border-bottom">
+        <h1 class="h2">Sign up</h1>
+    </div>
+</main>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<form method="POST"  enctype="multipart/form-data">{% csrf_token%}
+
+
+        <!--
+             <div class="alert alert-primary" role="alert">
+             signup
+             </div>
+        -->
+        <div class="jumbotron">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Company Info:</h2>
+                </div><!--Card-header end -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ company_add.name.label_tag }}
+                            {{ company_add.name }}
+                        </div><!--col end -->
+                        <div class="col-md-6">
+                            {{ company_add.address_line1.label_tag }}
+                            {{ company_add.address_line1 }}
+                        </div><!--col end -->
+                    </div><!--row end -->
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ company_add.city.label_tag }}
+                                {{ company_add.city }}
+                            </div>
+
+                        </div><!--col end -->
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ company_add.State.label_tag }}
+                                {{ company_add.State }}
+                            </div>
+
+                        </div><!--col end -->
+                    </div><!--row end -->
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ company_add.postal_code.label_tag }}
+                                {{ company_add.postal_code }}
+                            </div>
+
+                        </div><!--col end -->
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ company_add.country.label_tag }}
+                                {{ company_add.country }}
+                            </div>
+
+                        </div><!--col end -->
+                    </div><!--row end -->
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ company_add.fax.label_tag }}
+                                {{ company_add.fax }}
+                            </div>
+
+                        </div><!--col end -->
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ company_add.website.label_tag }}
+                                {{ company_add.website }}
+                            </div>
+
+                        </div><!--col end -->
+                    </div><!--row end -->
+
+                    <div class="label">
+                        <div class="card card-header bg-success">
+                            Admin Info
+                        </div><!--card2 end -->
+                    </div><!--label end -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.username.label_tag }}
+                                {{ form.username }}
+                            </div>
+                        </div><!--col end -->
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.password1.label_tag }}
+                                {{ form.password1 }}
+
+                            </div>
+                        </div><!--col end -->
+                    </div><!--row end -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.password2.label_tag }}
+                                {{ form.password2 }}
+                            </div>
+                        </div><!--col end -->
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.first_name.label_tag }}
+                                {{ form.first_name }}
+
+                            </div>
+                        </div><!--col end -->
+                    </div><!--row end -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.last_name.label_tag }}
+                                {{ form.last_name }}
+                            </div>
+                        </div><!--col end -->
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+
+                            </div>
+                        </div><!--col end -->
+                    </div><!--row end -->
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ form.is_staff.label_tag }}
+                                {{ form.is_staff }}
+                            </div>
+                        </div><!--col end -->
+                          <div class="col-md-6">
+                            <div class="label">
+                                {{ form.is_active.label_tag }}
+                                {{ form.is_active }}
+                            </div>
+                          </div><!--col end -->
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="label">
+                                  {{ form.is_superuser.label_tag }}
+                                  {{ form.is_superuser }}
+                              </div>
+                          </div><!--col end -->
+                      </div><!-- row end -->
+
+
+                    <!--                  Employee Detail -->
+
+                        <div class="label">
+                            <div class="card card-header bg-danger">
+                                Personal Info
+                            </div><!--card2 end -->
+                        </div><!--label end -->
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ employee_form.contact.label_tag }}
+                                {{ employee_form.contact }}
+                            </div>
+                        </div><!--col end -->
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ employee_form.birth_date.label_tag }}
+                                {{ employee_form.birth_date }}
+
+                            </div>
+                        </div><!--col end -->
+                    </div><!--row end -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ employee_form.address.label_tag }}
+                                {{ employee_form.address }}
+
+                            </div>
+                        </div><!--col end -->
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ employee_form.gender.label_tag }}<br>
+                                {{ employee_form.gender }}
+
+                            </div>
+                        </div><!--col end -->
+                    </div><!--row end -->
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="label">
+                                {{ employee_form.profile_photo.label_tag }}<br>
+                                {{ employee_form.profile_photo }}
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="label">
+                                    {{ employee_form.salary.label_tag }}
+                                    {{ employee_form.salary }}
+                                </div>
+
+                            </div><!--col end -->
+                        </div><!--row end -->
+                    <!-- <div class="row">
+                         <div class="col-md-6">
+                         <div class="label">
+                         {{ employee_form.company.label_tag }}
+                         {{ employee_form.company }}
+                         </div>
+                         </div><!--col end -->
+                   <!-- <div class="col-md-6">-->
+                    <!--    <div class="label">-->
+
+                       <!-- </div>-->
+                  <!--  </div><!--col end -->
+               <!-- </div><!--row end -->
+
+                  <!--  {{form.as_p}}-->
+
+                    <div class="label">
+                        <div class="container buttonadd">
+                            <button class="btn btn-lg btn-primary signupwidth" type="submit">Save</button>
+                        </div>
+                    </div>
+                </div><!--Card-body end -->
+            </div><!--Card end -->
+        </div><!-- jumbotron end-->
+    </form>
+    {% endblock %}
