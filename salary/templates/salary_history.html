@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-5 border-bottom">
+    <h1 class="h2"> Salary History </h1>
+    <a href="javascript:history.go(-1)" class="btn btn-outline-primary mr-5" style="width:15%">back</a>
+</div>
+
+
+<div class="card card-body center">
+
+    <form method="post">{% csrf_token %}
+
+        {{ form.as_p }}
+        <p class="btncenter"> <button id="jadhav" type="submit" class="btn btn-success" style="width:30%">Next
+        </button></p>
+
+    </form>
+</div>
+
+
+<div id="sachin">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 pt-3 mb-3 mt-5 border-bottom border-top">
+        <h3 class=""> Salary History of <u><strong> {{name}} </strong></u>:</h3>
+
+    </div>
+
+    <table id="t01" class=" table1 table-responsive mt-5 mb-5">
+        <tr>
+            <th>date</th>
+            <th>basic</th>
+            <th>hra</th>
+            <th>convey allow</th>
+            <th>special allow</th>
+            <th>professional Tax</th>
+            <th>Income Tax </th>
+            <th>Loss of Pay</th>
+            <th>Gross Earnings</th>
+            <th>Gross deduction</th>
+            <th>Total Days</th>
+            <th>Weekly Off</th>
+            <th>public Holidays</th>
+            <th>paid days</th>
+            <th>Net Salary</th>
+        </tr>
+        <tr>
+            {% for a in history %}
+
+            <td>{{ a.date }}</td>
+            <td>{{ a.basic }}</td>
+            <td>{{ a.hra }}</td>
+            <td>{{ a.conveyance_allow }}</td>
+            <td>{{ a.special_allowence }}</td>
+            <td>{{ a.professional_tax }}</td>
+            <td>{{ a.income_tax }}</td>
+            <td>{{ a.loss_of_pay }}</td>
+            <td>{{ a.gross_earnings }}</td>
+            <td>{{ a.gross_deduction }}</td>
+            <td>{{ a.total_days }}</td>
+            <td>{{ a.weekly_off }}</td>
+            <td>{{ a.public_holidays }}</td>
+            <td>{{ a.paid_days }}</td>
+            <td>{{ a.net_salary }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

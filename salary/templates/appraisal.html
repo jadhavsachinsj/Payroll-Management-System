@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-5 border-bottom">
+    <h1 class="h2">Appraisal History  </h1>
+
+    <a href="javascript:history.go(-1)" class="btn btn-outline-primary mr-5" style="width:15%">back</a>
+
+    </div>
+</div>
+
+<div class="card card-body center mt-5">
+
+    <form method="post">{% csrf_token %}
+
+        {{ form.as_p }}
+        <p class="btncenter"> <button type="submit" class="btn btn-success" style="width:30%">Next
+        </button></p>
+
+    </form>
+</div>
+
+
+<div id="sachin">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 pt-3 mb-3 mt-5 border-bottom border-top">
+        <h3 class=""> Salary History of <u><strong> {{name}} </strong></u>:</h3>
+
+
+    </div>
+
+    <table id="t01" class="mb-5" style="width:100%;">
+        <tr>
+            <th>Employee</th>
+            <th>Salary</th>
+            <th>Updation date</th>
+            <th>Effective from</th>
+
+        </tr>
+        <tr>
+            {% for a in appraisal %}
+
+            <td>{{ a.employee }}</td>
+            <td>{{ a.salary }}</td>
+            <td>{{ a.updation_date }}</td>
+            <td>{{ a.effective_from }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+    {% endblock %}

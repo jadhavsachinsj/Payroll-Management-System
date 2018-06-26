@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from .models import Employee, DesignationHistory
 from django.views.generic import ListView
 from .forms import AddEmployeeForm, UserForm, LoginForm, DesignationHistoryForm, JobTypeHistoryForm, DepartmentHistoryForm
-from Company.models import Designation, WorkType, Department, JobType
+from company.models import Designation, WorkType, Department, JobType
 
 # Import For Employee Registration
 from django.contrib.auth import login, authenticate
@@ -13,19 +13,33 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 from django.contrib import messages
 # Company Add
-import Company
-from Company.models import Company
-from Company.forms import CompanyForm
+import company
+from company.models import Company
+from company.forms import CompanyForm
 
 
 # For Employee Profile
 from django.utils import timezone
 import datetime
 from django.contrib.auth.models import User
+from salary.models import Salary
 
 # For Company Add
 
-from .models import Company
+from .models import Company, DepartmentHistory
+
+# import for Email
+from django.conf import settings
+from django.core.mail import EmailMessage
+from django.core.mail import send_mail
+from django.template import loader
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
+# import for chart
+from django.db.models import Count, Q
+
+from django.contrib.auth.decorators import login_required
 
 
 def employee_register(request):
@@ -36,38 +50,24 @@ def employee_register(request):
         form = UserForm(request.POST or None)
         company_add = CompanyForm(request.POST or None)
         employee_form = AddEmployeeForm(request.POST or None, request.FILES)
-     #   print(form)
-     #   print(employee_form)
-     #   print(company_add)
 
         if company_add.is_valid() and form.is_valid() and employee_form.is_valid():
 
             try:
-                print("zzzzzzzzzzzzzzzzzzzzzzzz", form)
+                
 
                 company = company_add.save()
-                print("COMPANY IS----------------", company)
-                print("************************************")
-
                 user = form.save()
-                print("USER IS", user)
-                print("888888888888888888888888888888888888888888888888888")
-
                 employee = employee_form.save(commit=False)
                 employee.company = company
                 employee.user = user
-
                 employee = employee_form.save()
-                # print(employee)
                 messages.success(request, 'Registration successfull')
-                # return redirect('employee_login')
                 return render(request, 'signup_complete.html', {})
             except:
                 print('Exception occures..! ')
         else:
-            print("asdjksh")
             messages.error(request, 'Form is Not Valid')
-            print("Error List ", form.errors)
             form = UserForm()
             company_add = CompanyForm()
             employee_form = AddEmployeeForm()
@@ -79,7 +79,7 @@ def employee_register(request):
             return render(request, 'Signup.html', context)
 
     else:
-        print("request is Not Post")
+       
         form = UserForm()
         company_add = CompanyForm()
         employee_form = AddEmployeeForm()
@@ -92,45 +92,40 @@ def employee_register(request):
 
 
 def employee_list(request):
+    print(request.user)
     print(request.user.employee.company)
     queryset = Employee.objects.filter(company=request.user.employee.company)
-    # queryset = User.objects.all()
-    # employee = get_object_or_404(User, pk=request.user.employee.company.pk)
-    print(queryset)
-
-    # queryset = Employee.objects.all()
-
     context = {
 
         'object_list': queryset,
     }
-
     return render(request, 'base.html', context)  # context)
 
 
+@login_required
 def employee_create(request):
+
     designation = Designation.objects.filter(
         company=request.user.employee.company)
-    print("aaaaaaaaaaaa", request.method, designation)
     job_type = JobType.objects.filter(company=request.user.employee.company)
-
     department = Department.objects.filter(
         company=request.user.employee.company)
+
     if request.method == "POST":
-        print(request.method)
 
+        username = request.POST.get('username')
+        password = request.POST.get('password1')
+        company = request.user.employee.company
         user_form = UserForm(request.POST or None)
-
         employee_form = AddEmployeeForm(
-            request.POST, request.FILES)  # , instance=a)
+            request.POST, request.FILES)
         des_history_form = DesignationHistoryForm(request.POST)
 
         jobtype_history_form = JobTypeHistoryForm(request.POST)
 
         department_history_form = DepartmentHistoryForm(request.POST)
 
-        print(employee_form, user_form)
-        print("erfe", request.POST)
+        print(employee_form.errors, user_form.errors)
 
         if user_form.is_valid() and employee_form.is_valid() and des_history_form.is_valid() and jobtype_history_form.is_valid() and department_history_form.is_valid:
 
@@ -140,7 +135,7 @@ def employee_create(request):
                 employee = employee_form.save(commit=False)
                 employee.user = user
                 employee.company = request.user.employee.company
-                print("sdsfsaaaaaaaaaaaaa", employee.company)
+
                 employee.save()
 
                 deshistory = des_history_form.save(commit=False)
@@ -160,18 +155,26 @@ def employee_create(request):
                 department_history.date = datetime.datetime.now()
                 department_history.save()
 
-                messages.success(request, 'Employee add successfull')
+                email = user.email
+                html_message = loader.render_to_string(
+                    'employee_reg_msg.html',
+                    {
+                        'username': username,
+                        'password': password,
+                        'subject': 'Thank u for joining in ' + str(company),
+                    }
+                )
 
+                send_mail('amazatic solutions', 'Congratulations', [
+                          email], settings.EMAIL_HOST_USER, fail_silently=False, html_message=html_message)
+                messages.success(request, 'Employee add successfull')
                 return redirect('employee_list')
 
-            except:
+            except Exception as e:
 
-                print('Exception Occure..!')
+                print('Exception Occure..!', e)
         else:
-
-            print("ERROR LIST IS:", employee_form.errors)
-            messages.error(request, 'Form is Not Valid')
-
+            messages.error(request, 'Form is Not Valid plz ')
             employee_form = AddEmployeeForm()
             user_form = UserForm()
             des_history_form = DesignationHistoryForm()
@@ -179,7 +182,6 @@ def employee_create(request):
             department_history_form = DepartmentHistoryForm()
 
             return render(request, 'empEdit.html', {'user_form': user_form, 'employee_form': employee_form, 'des_history_form': des_history_form, 'jobtype_history_form': jobtype_history_form, 'department_history_form': DepartmentHistoryForm})
-            print("SACHINJADHAV")
 
     else:
 
@@ -196,30 +198,55 @@ def employee_create(request):
             'department_history_form': DepartmentHistoryForm
         }
 
-    return render(request, 'empEdit.html', context)
+        return render(request, 'empEdit.html', context)
 
 
 def employee_update(request, pk):
 
     print(request, pk)
     emp = get_object_or_404(Employee, pk=pk)
-    # user = get_object_or_404(User, pk=employee.user.pk)
-    print(emp, "user")
+
+    designation = Designation.objects.filter(
+        company=request.user.employee.company)
+
+    job_type = JobType.objects.filter(company=request.user.employee.company)
+
+    department = Department.objects.filter(
+        company=request.user.employee.company)
+
     if request.method == "POST":
 
         employee_form = AddEmployeeForm(request.POST or None,
                                         request.FILES, instance=emp)
         user_form = UserForm(request.POST or None, instance=emp.user)
+        des_history_form = DesignationHistoryForm(request.POST)
 
-        if employee_form.is_valid() and user_form.is_valid():
+        jobtype_history_form = JobTypeHistoryForm(request.POST)
+
+        department_history_form = DepartmentHistoryForm(request.POST)
+
+        if employee_form.is_valid() and user_form.is_valid() and des_history_form.is_valid() and jobtype_history_form.is_valid() and department_history_form.is_valid():
             try:
 
                 user = user_form.save()
                 emp = employee_form.save()
-                # print("bvrtybn", emp, user)
-                # emp.user = user
-                # emp.save()
-                # user.save()
+
+                deshistory = des_history_form.save(commit=False)
+                deshistory.employee = user.employee
+                deshistory.company = request.user.employee.company
+                deshistory = des_history_form.save()
+
+                jobtype = jobtype_history_form.save(commit=False)
+                jobtype.employee = user.employee
+                jobtype.company = request.user.employee.company
+                jobtype.date = datetime.datetime.now()
+                jobtype.save()
+
+                department_history = department_history_form.save(commit=False)
+                department_history.employee = user.employee
+                department_history.company = request.user.employee.company
+                department_history.date = datetime.datetime.now()
+                department_history.save()
                 return redirect('employee_list')
             except:
 
@@ -229,33 +256,51 @@ def employee_update(request, pk):
 
         user_form = UserForm(instance=emp.user)
         employee_form = AddEmployeeForm(instance=emp)
+        des_history_form = DesignationHistoryForm()
+
+        jobtype_history_form = JobTypeHistoryForm()
+
+        department_history_form = DepartmentHistoryForm()
 
         context = {
             'user_form': user_form,
             'employee_form': employee_form,
+            'des_history_form': des_history_form,
+            'jobtype_history_form': jobtype_history_form,
+            'department_history_form': department_history_form,
         }
 
     return render(request, 'empEdit.html', context)
 
 
 def employee_home(request):
-
-    return render(request, 'index.html', {})
+    m_count = Employee.objects.filter(
+        gender='M', company_id=request.user.employee.company).count()
+    f_count = Employee.objects.filter(
+        gender='F', company_id=request.user.employee.company).count()
+    if request.user.is_superuser:
+        return render(request, 'admin.html', {'m_count': m_count, 'f_count': f_count})
+    else:
+        return render(request, 'user.html', {})
 
 
 def employee_display(request, pk):
-    print(request)
 
     user = get_object_or_404(User, pk=pk)
-    print('1111111111111111', pk)
-    print("askjdhjsahjh", user)
+    designation = DesignationHistory.objects.filter(
+        employee_id=pk).latest('date')
+    salary = Salary.objects.filter(employee_id=pk)
+    for obj in salary:
+        print("salary", obj.basic)
 
+    department = DepartmentHistory.objects.filter(employee_id=pk).latest('pk')
+    join_date = user.date_joined.strftime("%d-%B-%Y")
     context = {
-        'user': user,
-        #'employee': emp,
-        #        'designation': designation,
-
+        'user1': user,
+        'designation': designation,
+        'department': department,
+        'date': join_date,
+        'salary': salary,
     }
-    print("AAAAAAA", context)
 
     return render(request, 'profile.html', context)

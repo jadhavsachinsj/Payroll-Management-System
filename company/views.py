@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from .models import Company, Holiday, Designation, JobType, WorkType, Department
+from .models import Company, Holiday, Designation, JobType, WorkType, Department, CompanyDeductions
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from .forms import CompanyForm, DesignationAddForm, JobtypeAddForm, WorktypeAddForm, HolidayAddForm, DepartmentAddForm, DeductionForm
@@ -43,6 +43,8 @@ def company_display(request, pk):
 
 def deduction_add(request):
     print("Request", request)
+    deductions = CompanyDeductions.objects.all()
+    print(deductions)
 
     if request.method == 'POST':
 
@@ -60,10 +62,10 @@ def deduction_add(request):
             deduction_form = DeductionForm()
 
     else:
-        messages.error(request, 'Request is not Post')
+        #        messages.error(request, 'Request is not Post')
         deduction_form = DeductionForm()
 
-    return render(request, 'deduction_add.html', {'deduction_form': deduction_form})
+    return render(request, 'deduction_add.html', {'deduction_form': deduction_form, 'deductions': deductions})
 
 
 def company_update(request, pk):
@@ -111,8 +113,8 @@ def holiday_add(request):
             return redirect('add_holiday')
     else:
         print('222222222222')
-        messages.error(
-            request, 'Holiday is Not added Successfully..Pls Try Again..')
+ #       messages.error(
+  #          request, 'Holiday is Not added Successfully..Pls Try Again..')
         form_holiday = HolidayAddForm()
     return render(request, "holiday_add.html", {'form': form_holiday, 'holiday_list': holiday_list})
 
@@ -120,16 +122,23 @@ def holiday_add(request):
 def worktype_add(request):
     worktype_list = WorkType.objects.filter(
         company=request.user.employee.company)
+    print('worktype_list :', worktype_list)
+
     if request.method == "POST":
+
         worktype_form = WorktypeAddForm(request.POST)
+
         if worktype_form.is_valid():
+
             worktype = worktype_form.save(commit=False)
             worktype.company = request.user.employee.company
             worktype = worktype_form.save()
             messages.success(request, 'WorkType Added Successfully...')
             return redirect('add_worktype')
+
     else:
-        messages.error(request, 'workType is Not Added...')
+
+        #messages.error(request, 'workType is Not Added...')
         worktype_form = WorktypeAddForm()
     return render(request, "add_worktype.html", {'form': worktype_form, 'worktype_list': worktype_list})
 
@@ -158,7 +167,7 @@ def designation_add(request):
             messages.error(request, 'form is not valid')
     else:
         print('afjasejfksdjk')
-        messages.error(request, 'Method is not Post')
+#        messages.error(request, 'Method is not Post')
         designationForm = DesignationAddForm()
         return render(request, "designation.html", {'form': designationForm, 'designation': designation_list})
 
@@ -180,7 +189,7 @@ def department_add(request):
             messages.success(request, 'Department Added Successfully...')
             return redirect('add_department')
     else:
-        messages.error(request, 'Department Is not Added Successfully...')
+       #     messages.error(request, 'Department Is not Added Successfully...')
         form_department = DepartmentAddForm()
     return render(request, "department_add.html", {'form': form_department, 'department_list': department_list})
 

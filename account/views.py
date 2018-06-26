@@ -20,7 +20,7 @@ def home_view(request):
 
 def login_view(request):
 
-    print("Only Request", request.user)
+    print("Only Request", request.user, request.method)
 
     if request.method == "POST":
 
@@ -35,26 +35,33 @@ def login_view(request):
 
         user = authenticate(request, username=username, password=password)
         print("REQUEST", request)
-        # print(user.employee.company)
+        print(user.employee.company)
 
         if user is not None:
-            # if user.is_superuser:
-
-            #     login(request, user)
-
-            #     return redirect('employee_list')
-            # else:
+            print("kkkkkkkkkkkkk", user.is_superuser)
             login(request, user)
 
             return redirect('employee_home')
+
+            # if user.is_superuser:
+
+            #     #                return render(request, 'admin.html', {})
+
+            # else:
+
+            #     login(request, user)
+
+            #     # return render(request, 'employee.html', {})
+            #     return redirect('employee_home')
         else:
             messages.error(request, 'invalid Employee', extra_tags='alert')
 
     else:
         print("aaaaaaaaaaaaaaaaaaa")
         form = LoginForm()
+        # print(form)
 
-    return render(request, 'login.html', {'form': form})
+        return render(request, 'login.html', {'form': form})
 
 
 def logout_view(request):

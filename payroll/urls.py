@@ -41,7 +41,7 @@ urlpatterns = [
     url(r'', include("employee.urls")),
     url(r'', include("company.urls")),
     url(r'', include("attendance.urls")),
-    url(r'', include("payroll.urls")),
+    url(r'', include("salary.urls")),
     #url(r'^api-auth/', include('rest_framework.urls')),
 
 ]

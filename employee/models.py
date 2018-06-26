@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.timezone import now
+
 from decimal import Decimal
-import Company
-import Attendance
-from Company.models import JobType, Designation, Department, Company
+import company
+import attendance
+from company.models import JobType, Designation, Department, Company
 from django.contrib.auth.models import User
 
 
@@ -15,35 +17,30 @@ class Employee(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    middle_name = models.CharField(max_length=12, null=True)
     contact = models.CharField(
         max_length=12, blank=False, null=False, default='0')
     birth_date = models.DateField()
-    salary = models.DecimalField(
-        max_digits=10, decimal_places=4, default=Decimal('0.0000'))
     address = models.TextField(max_length=200)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     profile_photo = models.ImageField(
         upload_to='payroll', height_field=None, width_field=None, max_length=100, null=True)
 
-    #first_name = models.CharField(max_length=50)
-    #middle_name = models.CharField(max_length=50)
-    #last_name = models.CharField(max_length=50)
-
-    # alter_contact_no = models.CharField(
-    #   max_length=12, blank=False, null=False, default='0')
-
-    #join_date = models.DateField()
-    #email = models.EmailField(max_length=254)
-
-    #status = models.BooleanField()
-
-    # leave_left=models.IntegerField()
-    # designation        =models.CharField(max_length=50)
-    #    confirmation_period = models.IntegerField(default=0, blank=False)
     def __str__(self):
 
         return '{} {}'.format(self.user.first_name, self.user.last_name)
-        # return '{} {}'.format(self.address, self.profile_photo)
+    
+class EmployeeSalary(models.Model):
+    employee = models.ForeignKey(Employee)
+    salary = models.DecimalField(decimal_places=2,
+                                 max_digits=10,
+                                 default=Decimal('0.0000000000')
+                                 )
+    updation_date = models.DateField(default=timezone.now)
+    effective_from = models.DateField()
+
+    def __str__(self):
+        return self.employee.user.first_name + str(self.updation_date) + str(self.effective_from)
 
 
 class DesignationHistory(models.Model):
@@ -67,7 +64,7 @@ class DepartmentHistory(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=True)
 
     def __str__(self):
-        return '{}{}{}'.format(self.Employee, self.date, self.department)
+        return '{}{}{}'.format(self.employee, self.date, self.department)
 
 
 class JobTypeHistory(models.Model):
@@ -77,7 +74,7 @@ class JobTypeHistory(models.Model):
     date = models.DateField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
-        return '{}{}{}'.format(self.Employee, self.jobtype, self.date)
+        return '{}{}{}'.format(self.employee, self.jobtype, self.date)
 
 
 class LeaveHistory(models.Model):
@@ -90,4 +87,4 @@ class LeaveHistory(models.Model):
 
     def __str__(self):
 
-        return '{}{}{}'.format(self.Employee, self.attendence, self.date)
+        return '{}{}{}'.format(self.employee, self.attendence, self.date)

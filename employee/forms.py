@@ -4,7 +4,7 @@ from django.forms.fields import DateField
 
 
 from .models import Employee, Company, DesignationHistory, JobTypeHistory, DepartmentHistory
-from Company.models import Designation, Department
+from company.models import Designation, Department
 
 
 # For Employee Registration
@@ -17,8 +17,16 @@ class DateInput(forms.DateInput):
 
 
 class UserForm(UserCreationForm):
-    class Meta:
 
+    password1 = forms.CharField(
+        label=("Password"),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'type': 'password', 'required': 'True'}),)
+
+    password2 = forms.CharField(
+        label=("Password confirmation"),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'type': 'password', 'required': 'True'}),)
+
+    class Meta:
         model = User
         fields = [
             'username',
@@ -48,10 +56,13 @@ class UserForm(UserCreationForm):
             'email': forms.EmailInput(
                 attrs={'class': 'form-control', 'placeholder': 'Enter An Email', ' maxlength': '100'}),
 
-            'password': forms.PasswordInput(
-                attrs={'class': 'form-control', 'placeholder': ' Enter Password', ' maxlength': '100'}),
-            'password2': forms.PasswordInput(
-                attrs={'class': 'form-control', 'placeholder': ' Enter Password', ' maxlength': '100'}),
+            # 'password1': forms.PasswordInput(
+            #     attrs={'class': 'form-control', 'placeholder': ' Enter Password', ' maxlength': '100'}),
+            #'password2': forms.PasswordInput(
+            #   attrs={'class': 'form-control', 'placeholder': ' Enter Password', ' maxlength': '100'}),
+
+            'is_staff': forms.CheckboxInput(
+                attrs={'class': 'form-control'}),
 
 
         }
@@ -81,72 +92,39 @@ class LoginForm(forms.ModelForm):
 
 class AddEmployeeForm(forms.ModelForm):
 
-    # GENDER_CHOICES = (
-    #     ('M', 'Male'),
-    #     ('F', 'Female'),
-    # )
-
-    # select = forms.ChoiceField(widget=forms.Select, choices=GENDER_CHOICES)
-
     class Meta:
 
         model = Employee
         fields = [
-            #'first_name',
-            #'middle_name',
-            #'last_name',
-            #'user',
-            'contact',
-            #'alter_contact_no',
+            'middle_name',
+            'contact',            
             'birth_date',
             'address',
-            #'join_date',
-            #'email',
-            'gender',
-            #'status',
+            'gender',          
             'profile_photo',
-            'salary',
         ]
         widgets = {
-            'first_name': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Enter Employee Name here', ' maxlength': '255'}),
-
+           
             'middle_name': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': 'Enter Employee Middle Name here', ' maxlength': '255'}),
-
-            'last_name': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Enter Employee Last Name here', ' maxlength': '255'}),
-
             'contact': forms.NumberInput(
                 attrs={'class': 'form-control', 'placeholder': 'Enter Employee Contact here', ' maxlength': '12'}),
-
-            # 'alter_contact_no': forms.NumberInput(
-            #    attrs={'class': 'form-control', 'placeholder': 'Enter Alternate Contact here', ' maxlength': '12'}),
-
             'birth_date': DateInput(
                 attrs={'class': 'form-control', 'placeholder': 'Enter Birthdate'}),
             'address': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': 'Enter Employee Address here', ' maxlength': '255'}),
-
-            #'join_date': DateInput(
-            #   attrs={'class': 'form-control', 'placeholder': 'Select Date'}),
-
-            #'status': forms.CheckboxInput(
-            #    attrs={'class': 'custom-control custom-checkbox'}),
-
+            'gender': forms.Select(
+                attrs={'class': 'form-control'}
+            ),
             'profile_photo': forms.ClearableFileInput(
                 attrs={'class': 'form-control', 'placeholder': 'Enter Profile Photo'}),
-
-            'salary': forms.NumberInput(
-                attrs={'class': 'form-control', 'placeholder': 'Enter Employee Salary here', ' maxlength': '10'}),
-
 
         }
 
 
 class SignUpForm(forms.ModelForm):
     confirm_password = forms.CharField(
-        max_length=32, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+        max_length=32, widget=forms.PasswordInput(attrs={'class': 'form-control'}),)
 
     class Meta:
         model = User
@@ -158,6 +136,7 @@ class SignUpForm(forms.ModelForm):
                   'confirm_password',
                   )
         widgets = {
+
             'username': forms.TextInput(
                 attrs={'class': 'form-control', }),
             'first_name': forms.TextInput(
@@ -168,7 +147,6 @@ class SignUpForm(forms.ModelForm):
                 attrs={'class': 'form-control', }),
             'password': forms.PasswordInput(
                 attrs={'class': 'form-control', 'required': 'True'}),
-
         }
 
 
@@ -180,17 +158,22 @@ class DesignationHistoryForm(forms.ModelForm):
             'designation',
 
         )
+        widgets = {
+            'designation': forms.Select(attrs={'class': 'form-control'})
+        }
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            self.fields['designamtion'].queryset = Designation.objects.filter(
-                request.user.employee.company)
+            self.fields['designamtion'].queryset = Designation.objects.filter(request.user.employee.company)
 
 
 class JobTypeHistoryForm(forms.ModelForm):
     class Meta:
         model = JobTypeHistory
         fields = ('jobtype',)
+        widgets = {
+            'jobtype': forms.Select(attrs={'class': 'form-control'})
+        }
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
@@ -204,6 +187,9 @@ class DepartmentHistoryForm(forms.ModelForm):
         fields = (
             'department',
         )
+        widgets = {
+            'department': forms.Select(attrs={'class': 'form-control'})
+        }
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)

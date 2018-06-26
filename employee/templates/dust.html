@@ -1,0 +1,49 @@
+                        <div class="card card-body">
+                            <table class="table table-user-information">
+                                <tbody>
+                                    <tr>
+                                        <td>Name:</td>
+                                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Designation:</td>
+                                        <td> {{ designation.designation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact:</td>
+                                        <td>{{ user.employee.contact }}<br>{{ user.employee.alter_contact_no }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Birth Date:</td>
+                                        <td>{{ user.employee.birth_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address:</td>
+                                        <td>{{ user.employee.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Join Date:</td>
+                                        <td>{{ user.date_joined }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email:</td>
+                                        <td>{{ user.email }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td>{{user.employee.gender}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status</td>
+                                            <td>{{user.is_active}}</td>
+                                        </tr>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>

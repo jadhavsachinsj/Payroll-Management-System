@@ -1,0 +1,70 @@
+{% extends 'index.html'%}
+{% load staticfiles %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-5 border-bottom">
+    <h1 class="h2"> Attendance History</h1>
+    <a href="javascript:history.go(-1)" class="btn btn-outline-primary mr-5" style="width:15%">back</a>
+</div>
+
+<div class="card card-body mt-5" >
+    <form method="post">{%csrf_token%}
+
+        <div class="row">
+            <div class="col-4">
+                {{history.employee.label_tag}}
+                {{history.employee}}
+            </div>
+            <div class="col-4">
+                {{history.from_date.label_tag}}
+                {{history.from_date}}
+            </div>
+            <div class="col-4">
+                {{history.to_date.label_tag}}
+                {{history.to_date}}
+
+            </div>
+            <p class="btncenter"> <button type="submit" class="btn btn-outline-success" style="width:30%;">search
+            </button></p>
+
+
+        </div><!-- row class End -->
+
+    </form>
+
+</div>
+
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 pt-3 mb-3 mt-5 border-bottom border-top">
+        <h3 class=""> Attendance History of <u><strong>{{name}} </strong></u>:</h3>
+
+
+    </div>
+
+    <table id="t01" class="table  mt-5 mb-5">
+        <tr>
+            <th>date</th>
+            <th>mark</th>
+            <th>Leave Type </th>
+            <th>Previlege Leave</th>
+            <th>Casual Leave</th>
+            <th>Loss of Pay</th>
+        </tr>
+        {% for attendance in attendances %}
+        <tr>
+            <td>{{ attendance.date }}</td>
+            <td>{{ attendance.mark }}</td>
+            <td>{{ attendance.leave_type }}</td>
+            <td>{{ attendance.rem_privilege_leave }}</td>
+            <td>{{ attendance.rem_casual_leave }}</td>
+            <td>{{ attendance.loss_of_pay }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+
+
+{% endblock %}

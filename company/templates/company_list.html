@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {% block content %}
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs pt-3">
     <li class="nav-item">
         <a class="nav-link active" href="{% url 'designation_add' %}">Add Designation</a>
     </li>
@@ -22,14 +22,14 @@
 </ul>
 
 
-<div class="jumbotron">
+<div class="jumbotron responsive">
     <div class="card">
         <div class="card-header">
             <h3>{{company.name }}</h3>
         </div><!--End of Header Class -->
 
         <div class="card-body">
-            <table class="table">
+            <table id="t01" class="table-responsive">
                 <thead>
                     <tr>
                         <th>Name</th>

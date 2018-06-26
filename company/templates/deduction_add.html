@@ -3,19 +3,62 @@
 
 {% block content %}
 
-<div class="container center">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mt-5 border-bottom">
+    <h1 class="h2">{{ request.user.employee.company }} Deductions:</h1>
+    <a href="javascript:history.go(-1)" class="btn btn-outline-primary mr-5" style="width:15%">back</a>
+</div>
+
+
+<div class="container center1">
 
     <div class="card card-body cardbodycenter">
 
         <form method="Post">{% csrf_token %}
             {{deduction_form.as_p}}
-       <p class="textalign">     <button type="submit" class="btn btn-primary" style="width:40%">Add</button></p>
+       <p class="textalign">     <button type="submit" class="btn btn-outline-primary" style="width:40%">Add</button></p>
         </form>
       </div>
   </div>
+  <div class="card mt-5">
+      <div class="card-header">
+          <h3>{{request.user.employee.company.name }} Salary Structure</h3>
+      </div><!--End of Header Class -->
+
+      <div class="card-body">
+          <table id="t01" class="table">
+              <thead>
+                  <tr>
+                      <th>Date</th>
+                      <th> Basic %</th>
+                      <th> hra %</th>
+                      <th> Conveyance Allowence </th>
+                      <th> professional Tax %</th>
+                       <th> Action</th>
+
+                  </tr>
+              </thead>
+              {% for deduction in deductions %}
+              <tbody>
+                  <tr>
+                      <td>{{ deduction.date}}</td>
+                      <td>{{ deduction.basic }}</td>
+                      <td>{{ deduction.hra}}</td>
+                      <td>{{ deduction.conveyance_allow }}</td>
+                      <td>{{ deduction.professional_tax}}</td>
+
+                      <td>
+                          <span><a class="btn btn-outline-primary btn-sm " href="#">Edit</a></span>
+                          <span> <button type="button" class="btn btn-outline-danger btn-sm ">Delete</button></span>
+                      </td>
+                  </tr>
+              </tbody>
+              {% endfor %}
+          </table>
+
+      </div>
+  </div> <!-- end of Card class -->
 
 
 
 
-
-{% endblock %}
+  {% endblock %}

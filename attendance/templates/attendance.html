@@ -1,0 +1,102 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-5 border-bottom">
+    <h1 class="h2">{{ request.user.employee.company }} Attendance</h1>
+
+
+    <div class="dropdown ">
+        <button class="dropbtn">History</button>
+        <div class="dropdown-content">
+            <a class="dropdown-item" href="{% url 'history'%}">History By Name</a>
+            <a class="dropdown-item" href="#">History By date</a>
+
+        </div>
+    </div>
+</div>
+
+  <div class="container">
+
+      <div class="card card-body">
+
+          <form method="Post">{% csrf_token %}
+             <!-- {{attendance.as_p}}-->
+              <div class="row">
+                  <div class="col-md-3">
+                      {{ attendance.employee.label_tag }}
+                      {{ attendance.employee }}
+                  </div><!--col end -->
+                  <div class="col-md-3">
+                      {{attendance.date.label_tag }}
+                      {{ attendance.date  }}
+                  </div><!--col end -->
+                  <div class="col-md-3" >
+                      {{attendance.mark.label_tag }}
+                      {{ attendance.mark }}
+                  </div><!--col end -->
+
+                  <div class="col-md-3" id="test">
+                      {{attendance.leave_type.label_tag }}
+                      {{ attendance.leave_type  }}
+                  </div><!--col end -->
+              </div>
+              <!--Second Row Start -->
+
+
+              <p class="attendbtn">  <button type="submit" class="btn btn-outline-primary " style="width:20%">Add</button></p>
+
+          </form>
+
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-12 col-md-6">
+              <div class="card card-header" style="margin-top:30px;margin-bottom:30px;">
+                  <h1 class="h2">Todays Present:<span class="badge badge-pill badge-dark float-right" style="width: 67px;height: 37px;"> {{ present_count }} </span></h2>
+
+                      <!-- <span class="badge badge-dark">4</span>-->
+
+              </div>
+              <div class="card card-header">
+              {% for obj in todays_present %}
+
+                  <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                          <img src=" {{obj.employee.profile_photo.url }}" class="img-" height=50 width=50 style="border-radius:50%;">
+                      </div>
+                      <div class="col-sm-6 col-md-8">
+                        <h5 class="textarrange">  {{obj.employee}}</h3>
+                      </div>
+                  </div>
+
+
+                  {%endfor%}
+              </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+              <div class="card card-header" style="margin-top:30px;margin-bottom:30px;">
+                  <h2>Todays Absent: <span class="badge badge-pill badge-dark float-right " style="width: 67px;height: 37px;" >{{ absent_count }}</span></h2>
+              </div>
+
+
+              <div class="card card-header">
+                  {% for obj in todays_absent %}
+                  <div class="row">
+                      <div class="col-sm-6 col-md-4">
+                          <img src=" {{obj.employee.profile_photo.url }}" class="img-" height=50 width=50 style="border-radius:50%;"></img>
+                      </div>
+                      <div class="col-sm-6 col-md-8">
+                          {{obj.employee}}
+                      </div>
+                  </div>
+                  {% endfor%}
+              </div>
+
+      </div>
+
+      {% endblock %}

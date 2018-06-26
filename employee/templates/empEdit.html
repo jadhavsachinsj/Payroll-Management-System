@@ -3,31 +3,141 @@
 {% block content %}
 <main role="main">
 
-    <div class="col col-md-9 pt-3 px-4">
+    <div class="col col-md-12 pt-3 px-4">
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">New Employee</h1>
         </div>
 
+        <div class="card card-body">
 
-        <div class="form_add_employee">
+            <form method="POST" enctype="multipart/form-data">{% csrf_token%}
+                <div class="row">
+                    <div class="col-4">
+                        <div class="label">
+                            {{ user_form.username.label_tag }}
+                        </div>
+                        {{ user_form.username }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{user_form.first_name.label_tag }}
+                        </div>
+                        {{ user_form.first_name }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{ user_form.last_name.label_tag }}
+                        </div>
+                        {{ user_form.last_name }}
+                    </div><!--col end -->
+                </div><!-- Row class Ends Here-->
 
-            <form method="POST" class="employee-form" enctype="multipart/form-data">{% csrf_token%}
-
-                <div class="card card-body">
-
-
-                    {{ user_form.as_p }}
-                    {{ des_history_form.as_p }}
-                    {{ jobtype_history_form.as_p }}
-                    {{ department_history_form.as_p }}
-                    {{ employee_form.as_p }}
-
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
-                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="label">
+                            {{ user_form.email.label_tag }}
+                        </div>
+                        {{ user_form.email }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{user_form.password1.label_tag }}
+                        </div>
+                        {{ user_form.password1 }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{ user_form.password2.label_tag }}
+                        </div>
+                        {{ user_form.password2 }}
+                    </div><!--col end -->
+                </div><!-- Row class Ends Here-->
+                <div class="row">
+                    <div class="col-4">
+                        <div class="label">
+                            {{ user_form.is_staff.label_tag }}
+                        </div>
+                        {{ user_form.is_staff }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{user_form.is_active.label_tag }}
+                        </div>
+                        {{ user_form.is_active }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{ user_form.is_superuser.label_tag }}
+                        </div>
+                        {{ user_form.is_superuser }}
+                    </div><!--col end -->
+                </div><!-- Row class Ends Here-->
+                <div class="row">
+                    <div class="col-4">
+                        <div class="label">
+                         {{ employee_form.contact.label_tag }}
+                        </div>
+                        {{ employee_form.contact }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{ employee_form.birth_date.label_tag }}
+                        </div>
+                        {{ employee_form.birth_date }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{ employee_form.address.label_tag }}
+                        </div>
+                        {{ employee_form.address }}
+                    </div><!--col end -->
+                </div><!-- Row class Ends Here-->
+                <div class="row">
+                    <div class="col-4">
+                        <div class="label">
+                            {{ employee_form.gender.label_tag }}
+                        </div>
+                        {{ employee_form.gender }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{ employee_form.profile_photo.label_tag }}
+                        </div>
+                        {{ employee_form.profile_photo }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{ employee_form.salary.label_tag }}
+                        </div>
+                        {{ employee_form.salary }}
+                    </div><!--col end -->
+                </div><!-- Row class Ends Here-->
+                <div class="row">
+                    <div class="col-4">
+                        <div class="label">
+                            {{ des_history_form.designation.label_tag }}
+                        </div>
+                        {{ des_history_form.designation }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{department_history_form.department.label_tag }}
+                        </div>
+                        {{ department_history_form.department }}
+                    </div><!--col end -->
+                    <div class="col-md-4">
+                        <div class="label">
+                            {{ jobtype_history_form.jobtype.label_tag }}
+                        </div>
+                        {{ jobtype_history_form.jobtype }}
+                    </div><!--col end -->
+                </div><!-- Row class Ends Here-->
+                <p class="btncenter">   <button class="btn  btn-primary" type="submit" style="width:15%">Save</button></p>
             </form>
-            {% endblock %}
         </div>
+        {% endblock %}
+
     </div>
 </main>
 

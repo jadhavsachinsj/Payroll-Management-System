@@ -1,0 +1,141 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Salary</h1>
+    </div>
+
+</div>
+
+<div class="card card-body">
+
+    <form method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-3">
+                {{ salary_form.employee.label_tag }}
+                {{ salary_form.employee }}
+            </div><!--col end -->
+            <div class="col-md-3">
+                {{salary_form.date.label_tag }}
+                {{ salary_form.date  }}
+            </div><!--col end -->
+            <div class="col-md-3">
+                {{salary_form.basic.label_tag }}
+                {{ salary_form.basic }}
+            </div><!--col end -->
+
+            <div class="col-md-3">
+                {{salary_form.hra.label_tag }}
+                {{ salary_form.hra  }}
+            </div><!--col end -->
+        </div>
+        <!--Second Row Start -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="label">
+                    {{ salary_form.conveyance_allow.label_tag }}
+                    {{ salary_form.conveyance_allow }}
+                </div>
+            </div><!--col end -->
+            <div class="col-md-3">
+                <div class="label">
+                    {{salary_form.special_allowence.label_tag }}
+                    {{ salary_form.special_allowence  }}
+                </div>
+            </div><!--col end -->
+            <div class="col-md-3">
+                <div class="label">
+                    {{salary_form.professional_tax.label_tag }}
+                    {{ salary_form.professional_tax }}
+                </div>
+            </div><!--col end -->
+
+            <div class="col-md-3">
+                <div class="label">
+                    {{salary_form.income_tax.label_tag }}
+                    {{ salary_form.income_tax  }}
+                </div>
+            </div><!--col end -->
+        </div>
+
+          <!--Third Row Start -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="label">
+                    {{ salary_form.loss_of_pay.label_tag }}
+                    {{ salary_form.loss_of_pay }}
+                </div>
+            </div><!--col end -->
+            <div class="col-md-3">
+                <div class="label">
+                    {{salary_form.gross_earnings.label_tag }}
+                    {{ salary_form.gross_earnings }}
+                </div>
+            </div><!--col end -->
+            <div class="col-md-3">
+                <div class="label">
+                    {{salary_form.gross_deduction.label_tag }}
+                    {{ salary_form.gross_deduction }}
+                </div>
+            </div><!--col end -->
+
+            <div class="col-md-3">
+                  <div class="label">
+                      {{salary_form.total_days.label_tag }}
+                      {{ salary_form.total_days }}
+                  </div>
+            </div><!--col end -->
+        </div>
+
+        <!--Third Row Start -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="label">
+                    {{ salary_form.weekly_off.label_tag }}
+                    {{ salary_form.weekly_off }}
+                </div>
+            </div><!--col end -->
+            <div class="col-md-3">
+                <div class="label">
+                    {{salary_form.public_holidays.label_tag }}
+                    {{ salary_form.public_holidays }}
+                </div>
+            </div><!--col end -->
+            <div class="col-md-3">
+                <div class="label">
+                    {{salary_form.net_salary.label_tag }}
+                    {{ salary_form.net_salary }}
+                </div>
+            </div><!--col end -->
+
+            <div class="col-md-3">
+                <!-- <div class="">-->
+                <!--  <a class="btn btn-primary" type="submit" role="button">print</a></td>-->
+
+                <p class="btncenter"> <button type="submit" class="btn btn-success" style="width:30%;margin-top:37px">print
+                </button></p>
+
+
+
+
+                <!--</div>-->
+            </div><!--col end -->
+        </div>
+
+
+
+
+
+
+       <!-- {{salary_form.as_p }}-->
+
+
+    </form>
+</div>
+{% endblock %}

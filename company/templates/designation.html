@@ -2,6 +2,11 @@
 {% load staticfiles %}
 
 {% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mt-5 border-bottom">
+    <h1 class="h2">{{ request.user.employee.company }} Designation:</h1>
+    <a href="javascript:history.go(-1)" class="btn btn-outline-primary mr-5" style="width:15%">back</a>
+</div>
+
 <form method="post">{% csrf_token %}
     <div class="card center">
         <div class="card-header">

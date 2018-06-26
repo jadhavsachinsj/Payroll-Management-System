@@ -3,16 +3,18 @@
 
 {% block content %}
 
-  <div class="container">
-      <div class="card card-header">
-          <h3> {{ request.user.employee.company }} WorkType</h3>
-      </div>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mt-5 border-bottom">
+    <h1 class="h2">{{ request.user.employee.company }} Worktype:</h1>
+    <a href="javascript:history.go(-1)" class="btn btn-outline-primary mr-5" style="width:15%">back</a>
+</div>
+
+  <div class="container jobtypeCenter">
 
       <div class="card card-body">
 
           <form method="Post">{% csrf_token %}
               {{form.as_p}}
-              <button type="submit" class="btn btn-primary">Add</button>
+             <p style="text-align:center"> <button type="submit" class="btn btn-outline-primary" style="width:50%;margin-top:5%">Add</button></p>
           </form>
       </div>
   </div>
@@ -20,13 +22,13 @@
 
 
 
-<div class="table  table-responsive table-bordered table-hover">
+<div class="table  table-responsive table-bordered table-hover mt-5 jobtypeCenter">
     <table class="table table-md table-striped ">
 
         <thead>
             <tr>
 
-                <th>WorkType </th>
+                <th style="text-align:center">WorkType </th>
 
             </tr>
         </thead>
@@ -34,7 +36,7 @@
 
         <tbody>
             <tr>
-                <td>{{works.type}}</td>
+                <td style="text-align:center">{{works.type}}</td>
             </tr>
         </tbody>
         {% endfor %}

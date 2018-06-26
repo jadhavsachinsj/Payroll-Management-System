@@ -1,3 +1,7 @@
+.tdStyle
+{
+  position:fixed;
+}
 .btn-add-emp {
   font-size: 20px;
   padding: 7px 11px;
@@ -13,79 +17,76 @@
   margin: auto;
   width:727px;
 }
-.sidebar-sticky {
-  position: sticky;
-  top: 48px;
-  height: calc(100vh - 48px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  padding: 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-}
+/*. sidebar-sticky { */
+/*   position: sticky; */
+/*   top: 48px; */
+/*   height: calc(100vh - 48px); */
+/*   padding-top: .5rem; */
+/*   overflow-x: hidden; */
+/*   overflow-y: auto; */
+/* } */
+/* .sidebar { */
+/*   position: fixed; */
+/*   top: 0; */
+/*   bottom: 0; */
+/*   left: 0; */
+/*   z-index: 100; */
+/*   padding: 0; */
+/*   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1); */
+/* } */
 
 
 
 /* css For Employee Profile  */
 
-.cardwidth {
-  min-width:75%;
+/* .cardwidth { */
+/*   min-width:75%; */
 
-}
+/* } */
 
-.user-row {
-  margin-bottom: 14px;
-}
+/* .user-row { */
+/*   margin-bottom: 14px; */
+/* } */
 
-.user-row:last-child {
-  margin-bottom: 0;
-}
+/* .user-row:last-child { */
+/*   margin-bottom: 0; */
+/* } */
 
-.dropdown-user {
-  margin: 13px 0;
-  padding: 5px;
-  height: 100%;
-}
+/* .dropdown-user { */
+/*   margin: 13px 0; */
+/*   padding: 5px; */
+/*   height: 100%; */
+/* } */
 
-.dropdown-user:hover {
-  cursor: pointer;
-}
+/* .dropdown-user:hover { */
+/*   cursor: pointer; */
+/* } */
 
-.table-user-information > tbody > tr {
-  border-top: 1px solid rgb(221, 221, 221);
-}
+/* .table-user-information > tbody > tr { */
+/*   border-top: 1px solid rgb(221, 221, 221); */
+/* } */
 
-.table-user-information > tbody > tr:first-child {
-  border-top: 0;
-}
+/* .table-user-information > tbody > tr:first-child { */
+/*   border-top: 0; */
+/* } */
 
 
-.table-user-information > tbody > tr > td {
-  border-top: 0;
-}
-.toppad
-{margin-top:20px;
-}
+/* .table-user-information > tbody > tr > td { */
+/*   border-top: 0; */
+/* } */
+/* .toppad */
+/* {margin-top:20px; */
+/* } */
 
-.setmargin {
-  margin-left: auto;
-  margin-right: auto;
-  width:auto;
+/* .setmargin { */
+/*   margin-left: auto; */
+/*   margin-right: auto; */
+/*   width:auto; */
 
-}
+/* } */
 
 
 /* Css for The Login Page */
-
-
-
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -93,42 +94,24 @@
   margin: auto;
 }
 
-
-.indexcard {
-  width:11rem;
-  margin-left: -1rem;
-  margin-top: -3rem;
-  margin-bottom:-3rem;
-}
-.jumbosidenav{
-  margin-right: -1rem;
-  margin-left: -2rem;
-  margin-top: 1rem;
-//  position:fixed;
-
-}
-.stickycont{
-  position:fixed;
-}
-
-
-.signupbutton {
-  margin-left: 18rem;
+.form1 {
+  border: 2px solid #f1f1f1;
+  margin-left: auto;
   margin-right: auto;
-  width: 10rem;
+  width: 193%;
+
+}
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+.container {
+  padding: 16px;
+}
+.loginlable{
+  margin-top:7px;
 }
 
-.stickymargin {
-  top:9rem;
-  left:2rem;
-}
-.a1{
-  background-color:#f1f1f1f1;
-}
-
-.right {
-  margin-right:-47rem;
-}
 /* css for the index.html signup form align center */
 
 .signupcenter {
@@ -140,4 +123,116 @@
 
 .backcolor {
   background-color:#80808017;
+}
+
+/* css for the baody background of index.html */
+.bg {
+  /* The image used */
+  background-image: url("images/images10.jpeg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* css for admin.html for sidebar*/
+
+.sidenav {
+  height: 100%;
+  width: 190px;
+  position: fixed;
+  z-index: 1;
+  top: 48px;
+  left: 0;
+  background-color:#111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 21px;
+  color: #818181;
+  display: block;
+}
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.main {
+ /* margin-left: 270px; Same as the width of the sidenav */
+  //font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/*css for employee add empEdit.html */
+.label {
+  margin-top: 17px;
+}
+
+.btncenter {
+  text-align: center;
+  margin-top: 40px;
+  width: 100%;
+}
+
+/* css for the dropdown*/
+.dropdown1 {
+  position: relative;
+  display: inline-block;
+  //margin-right:4%;
+}
+
+.dropbtn1 {
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  line-height: 7px;
+//  width:146%;
+
+}
+.dropdown1-content1 a{
+  color:black;
+}
+.dropdown1-content1 a:hover {
+  background-color: #f1f1f1;
+}
+.dropdown1-content1 {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 186px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown1:hover .dropdown1-content1 {
+  display: block;
+}
+
+@media only screen and (max-width: 767px){
+  .sidenav{
+    width:auto;
+    height:auto;
+    position:initial;
+    //display: inline-block;
+    margin: 0;
+
+  }
+  .sidenav a{
+    display:inline;
+
+
+  }
+  .container-fluid{
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+  }
 }

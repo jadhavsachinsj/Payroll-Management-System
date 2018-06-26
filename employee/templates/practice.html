@@ -7,6 +7,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="practice.css">
 
 
         <title>Hello, world!</title>
@@ -19,16 +20,60 @@
             <a href="">sachin</a>
 
         </div>
-        <div class="main">
+        <div id= "sidebar">
+            <ul>
+                <li> Home </li>
+                <li> about</li>
+                <li> Contact </li>
 
-            <h1>My Name Is Sachin</h1>
+            </ul>
+            <div class="toggle-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
 
 
 
 
+            <script>
+                $( document ).ready(function() {
 
+                $('.main-container a.rem-widget').click(function(){
+                $(this).parent().hide('slow');
+                $('.'+$(this).attr('id')).show('slow');
+                });
+                $('.navigation a').click(function(){
+                $(this).hide('slow');
+                $('#'+$(this).attr('class')).parent().show('slow');
+                });
 
+                });
+            </script>
+            <body>
+
+                <div class="main-container">
+                    <a href="#" class="rem-widget" id="nav-widget-add1">Remove</a>
+                </div>
+                <div class="main-container">
+                    <a href="#" class="rem-widget" id="nav-widget-add2">Remove</a>
+                </div>
+                <div class="main-container">
+                    <a href="#" class="rem-widget" id="nav-widget-add3">Remove</a>
+                </div>
+                <div class="main-container">
+                    <a href="#" class="rem-widget" id="nav-widget-add4">Remove</a>
+                </div>
+
+                <div class="navigation">
+                    <a href="#" style="display:none;" class="nav-widget-add1">Container 1</a>
+                    <a href="#" style="display:none;" class="nav-widget-add2">Container 2</a>
+                    <a href="#" style="display:none;" class="nav-widget-add3">Container 3</a>
+                    <a href="#" style="display:none;" class="nav-widget-add4">Container 4</a>
+                </div>
+
+                </body>
 
     </body>
     </html>

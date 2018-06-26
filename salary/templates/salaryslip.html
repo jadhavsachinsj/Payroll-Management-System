@@ -1,0 +1,167 @@
+{% load staticfiles %}
+
+<html>
+
+    <head>
+        <title>Test</title>
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <style>
+            body {
+            background-color: #f7f7f7;
+            }
+        </style>
+    </head>
+    <body>
+                    <!--    <span style="font-size:30px;float:right;"></span> <span style="font-size:15px;float:right;"></span>-->
+
+        <div>
+            <hr style="width:95%">
+            <div class="row">
+
+
+                <p style="text-align:center;"><strong style="font-size:30px;">{{ company }}</strong></p>
+
+
+                    <p style="text-align:center;"><strong style=""><u>Address :</u> {{ company_address }}</strong></p>
+
+
+            </div>
+            <hr style="width:95%">
+        </div>
+
+
+        <div class="container">
+        <div class="row">
+            <div class="col">
+                <span style="text-align:center;">
+                    Employee Name : <strong> {{ employee }} </strong>
+                </span>
+            </div>
+        </div>
+        <table style="table-layout: fixed; width:100%;">
+            <tr>
+                <td>
+                    <span style="text-align:center;">
+                        Designation : <strong> {{ designation }} </strong>
+                    </span>
+                </td>
+                <td>
+                    <span style="text-align:center;">
+                        Department : <strong> {{ department }} </strong>
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <table style="table-layout: fixed; width:100%;">
+            <tr>
+                <td>
+                    <span style="text-align:center;">
+                        Month & Year : <strong>{{ month_year }} </strong>
+                    </span>
+                </td>
+                <td>
+                    <span style="text-align:center;">
+                        Salary Date : <strong> {{ date }} </strong>
+                    </span>
+                </td>
+            </tr>
+            <hr style="width:95%">
+        </table>
+
+
+        <table style="table-layout: fixed; width:100%;">
+            <tr>
+                <td>
+                    <span style="text-align:center;">
+                        Working Days : <strong> {{ total_days }} </strong>
+                    </span>
+                </td>
+                <td>
+                    <span style="text-align:center;">
+                        Weekends & Holidays : <strong> {{ weekends }} </strong> + <strong> {{ public_holiday }} </strong>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="text-align:center;">
+                        Paid Days :<strong> {{ paid_days }} </strong>
+                    </span>
+                </td>
+                <td>
+                    <span style="text-align:center;">
+                        Loss of pay Days : <strong>{{ loss_off_pay }}</strong>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="text-align:center;">
+                        No of Leaves : <strong>{{ leaves }}</strong>
+                    </span>
+                </td>
+                <td>
+                    <span style="text-align:center;">
+                        Rem. Leaves(PL+CL) : <strong>{{ p_leave }}</strong> + <strong>{{ c_leave }}</strong>
+                    </span>
+                </td>
+            </tr>
+            <hr style="width:95%">
+        </table>
+
+        <div>
+            <table border="1" style="table-layout: fixed; width:90%;">
+                <tr style="background-color: #e8e9ea;">
+                    <th colspan="2"><center>Allowances</center></th>
+                    <th colspan="2"><center>Deductions</center></th>
+                </tr>
+                <tr>
+                    <td>Basic </td>
+                    <td style="text-align:right;padding-right:7px;">{{ basic }}</td>
+                    <td>Professional tax</td>
+                    <td style="text-align:right;padding-right:7px;">{{ professional_tax }}</td>
+                </tr>
+                <tr>
+                    <td>HRA </td>
+                    <td style="text-align:right;padding-right:7px;">{{ hra }}</td>
+                    <td>Income tax</td>
+                    <td style="text-align:right;padding-right:7px;">{{ income_tax }}</td>
+                </tr>
+                <tr>
+                    <td>Conveyance allowance </td>
+                    <td style="text-align:right;padding-right:7px;">{{ conveyance_allow }}</td>
+                    <td>Loss of pay</td>
+                    <td style="text-align:right;padding-right:7px;">{{ loss_of_pay }}</td>
+                </tr>
+                <tr>
+                    <td>Special allowance </td>
+                    <td style="text-align:right;padding-right:7px;">{{ special_allowence }}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Gross earning </strong></td>
+                    <td style="text-align:right;padding-right:7px;"><strong>{{ gross_earnings }}</strong></td>
+                    <td><strong>Gross deduction</strong></td>
+                    <td style="text-align:right;padding-right:7px;"><strong>{{ gross_deduction }}</strong></td>
+                </tr>
+            </table>
+            <hr style="width:95%">
+        </div>
+
+        <div class="row">
+            <div class="col">
+                    <span style="font-size:20px;text-align:center;">
+                        Net Salary : <strong>{{ net_salary }}</strong> <span style="font-size:17px;">({{ sal_in_words }})</span>
+                    </span>
+            </div>
+        </div>
+        <hr style="width:95%">
+        <center> Note: This is a computer generated pay slip hence does not require signature. </center>
+        <hr style="width:95%">
+        </div>
+
+    </body>
+    </html>

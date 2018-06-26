@@ -1,0 +1,46 @@
+/* Salary Model Css */
+.label{
+  margin-top:1rem;
+}
+
+.btnlabel{
+  margin-top:3rem;
+  width: 100%;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  width: 50%;
+}
+.btncenter{
+  margin-top:5%;
+  text-align: center;
+  width:100%;
+}
+
+
+
+/* */
+.table1 {
+  width:100%;
+}
+.table1, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+/*th, td {
+  padding: 15px;
+  text-align: left;
+}*/
+table#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+  background-color: #fff;
+}
+table#t01 th {
+  background-color: black;
+  color: white;
+}

@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-5 border-bottom">
+    <h1 class="h2">Employee Salary</h1>
+    <div class="btn-group mr-5" roll="group" aria-label="group1">
+        <a type="btn" href="{% url 'salary_history' %}" class="btn btn-outline-success" style="width:200px;">Salary History
+        </a>
+        <a type="btn" href="{% url 'add_salary' %}" class="btn btn-outline-warning" style="width:200px;">Add Salary
+        </a>
+        <a type="btn" href="{% url 'appraisal_history' %}" class="btn btn-outline-danger" style="width:200px;">Appraisal History
+        </a>
+
+    </div>
+</div>
+
+<div class="card card-body center">
+
+    <form method="post">{% csrf_token %}
+
+        {{ employee_select_form.as_p }}
+        <p class="btncenter"> <button type="submit" class="btn btn-success" style="width:30%">Next
+        </button></p>
+
+    </form>
+
+
+    {% endblock %}
